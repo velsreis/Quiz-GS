@@ -1,37 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-// require('dotenv').config()
-// console.log(process.env)
-
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite - React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+import React from "react";
+import "./App.css";
+import StartScreen from "./startScreen/StartScreen.tsx";
+import { IQuestions } from "./utils/IData.ts";
+enum ScreenEnum {
+  start,
+  questions,
+  result,
 }
 
-export default App
+interface IAppState {
+  screen: ScreenEnum;
+  data: IQuestions;
+}
+
+export default class App extends React.Component<{}, IAppState> {
+  // data = new URL(import.meta.env.VITE_GS_SCRIPT).toJSON();
+
+  state: IAppState = {
+    screen: ScreenEnum.start,
+    data: { questions: [] },
+  };
+
+  componentDidMount(): void {
+    // this.setState({data: ''})
+    fetch(import.meta.env.VITE_GS_SCRIPT)
+      .then((response) => response.json())
+      .then((json) => this.setState({ data: json }));
+  }
+
+  render() {
+    return (
+      <>
+        <StartScreen
+          startButton={() => {
+            console.log(this.state.data);
+            console.log("teste");
+          }}
+        />
+      </>
+    );
+  }
+}
