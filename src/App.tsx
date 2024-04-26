@@ -1,6 +1,8 @@
 import React from "react";
-import "./App.css";
-import StartScreen from "./startScreen/StartScreen.tsx";
+import styles from "./App.module.css";
+import StartScreen from "./components/startScreen/StartScreen.tsx";
+import QuestionsScreen from "./components/QuestionsScreen/QuestionsScreen.tsx";
+
 import { IQuestions } from "./utils/IData.ts";
 enum ScreenEnum {
   start,
@@ -22,22 +24,28 @@ export default class App extends React.Component<{}, IAppState> {
   };
 
   componentDidMount(): void {
-    // this.setState({data: ''})
     fetch(import.meta.env.VITE_GS_SCRIPT)
       .then((response) => response.json())
-      .then((json) => this.setState({ data: json }));
+      .then((json) =>
+        this.setState({ data: json }, () => console.log("json 2", json))
+      );
   }
 
   render() {
     return (
-      <>
-        <StartScreen
-          startButton={() => {
-            console.log(this.state.data);
-            console.log("teste");
-          }}
-        />
-      </>
+      <div className={styles.App}>
+        {this.state.screen === ScreenEnum.start && (
+          <StartScreen
+            startButton={() => {
+              this.setState({ screen: ScreenEnum.questions });
+            }}
+          />
+        )}
+        {this.state.screen === ScreenEnum.questions &&
+          this.state.data.questions.length > 0 && (
+            <QuestionsScreen questionsData={this.state.data} />
+          )}
+      </div>
     );
   }
 }

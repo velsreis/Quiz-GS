@@ -1,0 +1,161 @@
+.Questions {
+  max-width: 46.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 4rem;
+
+  .questionContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    margin-top: 2rem;
+
+    .questionNumber {
+      display: flex;
+
+      color: var(--tertiary-color);
+
+      font-size: 1.5rem;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 150%;
+
+      margin-bottom: 0.7rem;
+    }
+
+    .quizQuestion {
+      color: var(--secondary-color);
+
+      font-size: 2rem;
+      font-weight: 500;
+      line-height: 120%;
+
+      margin-bottom: 1rem;
+    }
+  }
+
+  .option {
+    font-family: inherit;
+    font-size: 2.3rem;
+    font-weight: 500;
+    line-height: 100%;
+
+    padding: 1.8rem 2rem 1.8rem 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 3.2rem;
+    width: 100%;
+
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 2.4rem;
+    cursor: pointer;
+    background: var(--progress-n-option-bg-color);
+    box-shadow: 0 1.6rem 4rem 0 var(--box-shadow-color);
+
+    position: relative;
+  }
+
+  .option:not(:last-child) {
+    margin-bottom: 2.4rem;
+  }
+  .optionLetterContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--option-letter-background-color);
+    border-radius: 0.8rem;
+  }
+  .option:hover .optionLetterContainer {
+    background-color: var(--accessibility-icon-color);
+  }
+
+  .optionLetter {
+    color: var(--option-letter-color);
+    width: 5.6rem;
+    height: 5.6rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .option:hover .optionLetter {
+    color: var(--primary-color);
+  }
+
+  .optionTextContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .optionText {
+    display: inline-block;
+    text-align: left;
+  }
+
+  .correctSelected {
+    border: 3px solid var(--correct-answer-color);
+  }
+
+  .wrongSelected {
+    border: 3px solid var(--wrong-answer-color);
+  }
+
+  .option.correctOption {
+    cursor: default;
+    /* border: var(--correct-answer-color); */
+  }
+
+  .option.correctOption .optionLetterContainer {
+    background-color: var(--correct-letter-container-color);
+  }
+
+  .option.correctOption .optionLetter {
+    color: var(--option-letter-color);
+  }
+
+  .option.wrongOption {
+    cursor: default;
+    /* border: var(--wrong-answer-color); */
+  }
+
+  .option.wrongOption .optionLetterContainer {
+    background-color: var(--wrong-letter-container-color);
+  }
+
+  .option.wrongOption .optionLetter {
+    color: var(--option-letter-color);
+  }
+  .nextButtonArea {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+    .nextButtonEnable {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .nextButtonDisable {
+      display: flex;
+      align-items: center;
+
+      cursor: default;
+      /* opacity: 0.7; */
+    }
+    .nextButtonLabel {
+      display: flex;
+      font-size: 1.7rem;
+    }
+    .arrowIcon {
+      fill: #5a6375;
+      /* opacity: 0.3; */
+      height: 1.8rem;
+      width: 1.8rem;
+    }
+  }
+}
