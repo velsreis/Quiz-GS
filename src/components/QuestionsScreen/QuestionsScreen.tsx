@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import styles from "./questions.module.css";
-import { IQuestions } from "../../utils/IData.ts";
+import { IQuestions, IResult } from "../../utils/IData.ts";
 
 interface IQuestionsScreenProps {
   questionsData: IQuestions;
@@ -15,6 +15,7 @@ interface IQuestionsScreenState {
   numQuestionsTotal: number;
   indexOptionSelected: number | null;
   points: number;
+  resultArray: IResult[];
 }
 export default class QuestionsScreen extends React.Component<IQuestionsScreenProps, IQuestionsScreenState> {
   constructor(props: IQuestionsScreenProps) {
@@ -27,6 +28,7 @@ export default class QuestionsScreen extends React.Component<IQuestionsScreenPro
       numQuestionsTotal: this.props.questionsData.questions.length,
       indexOptionSelected: null,
       points: 0,
+      resultArray: [],
     };
   }
 
@@ -53,6 +55,18 @@ export default class QuestionsScreen extends React.Component<IQuestionsScreenPro
       },
       () => console.log(this.state.scrambledAnswers)
     );
+  }
+
+  private setResult(isCorrect: boolean): void {
+    let resultArr = this.state.resultArray;
+    resultArr.push({
+      isCorrect: isCorrect,
+      question: this.state.currentQuestion,
+    });
+    this.setState({
+      points: isCorrect ? this.state.points + 1 : this.state.points,
+      resultArray: resultArr,
+    });
   }
 
   private setQuestion(): void {
@@ -93,6 +107,7 @@ export default class QuestionsScreen extends React.Component<IQuestionsScreenPro
             const isSelected = this.state.indexOptionSelected === index;
             console.log("isSelected", isSelected);
             console.log("points", this.state.points);
+            console.log("result", this.state.resultArray);
 
             return (
               <button
@@ -104,7 +119,8 @@ export default class QuestionsScreen extends React.Component<IQuestionsScreenPro
                 onClick={() => {
                   console.log("aaaaaa", isCorrect);
                   if (this.state.indexOptionSelected === null) {
-                    this.setState({ indexOptionSelected: index, points: isCorrect ? this.state.points + 1 : this.state.points });
+                    this.setState({ indexOptionSelected: index });
+                    this.setResult(isCorrect);
                   }
                 }}>
                 <div className={styles.optionLetterContainer}>

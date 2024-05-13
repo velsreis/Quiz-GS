@@ -1,3 +1,8 @@
+export interface IResult {
+  isCorrect: boolean;
+  question: string | undefined;
+}
+
 export interface IQuestions {
   questions: IQuestion[];
 }
