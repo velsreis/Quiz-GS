@@ -6,6 +6,7 @@ import { IQuestions, IResult } from "../../utils/IData.ts";
 
 interface IQuestionsScreenProps {
   questionsData: IQuestions;
+  resultReturn: (Res: IResult[]) => void;
 }
 interface IQuestionsScreenState {
   questionsData: IQuestions;
@@ -67,6 +68,9 @@ export default class QuestionsScreen extends React.Component<IQuestionsScreenPro
       points: isCorrect ? this.state.points + 1 : this.state.points,
       resultArray: resultArr,
     });
+    // if (this.state.indexQuestion + 1 === this.state.numQuestionsTotal) {
+    //   this.props.resultReturn(this.state.resultArray);
+    // }
   }
 
   private setQuestion(): void {
@@ -134,26 +138,36 @@ export default class QuestionsScreen extends React.Component<IQuestionsScreenPro
             );
           })}
 
-          {this.state.indexQuestion + 1 !== this.state.numQuestionsTotal && (
-            <div className={styles.nextButtonArea}>
-              <div
-                className={this.state.indexOptionSelected !== null ? styles.nextButtonEnable : styles.nextButtonDisable}
-                onClick={() => this.state.indexOptionSelected !== null && this.updateQuestion()}>
+          {/* {this.state.indexQuestion + 1 !== this.state.numQuestionsTotal && ( */}
+          <div className={styles.nextButtonArea}>
+            <div
+              className={this.state.indexOptionSelected !== null ? styles.nextButtonEnable : styles.nextButtonDisable}
+              onClick={() => {
+                if (this.state.indexOptionSelected !== null) {
+                  if (this.state.indexQuestion + 1 !== this.state.numQuestionsTotal) this.updateQuestion();
+                  else this.props.resultReturn(this.state.resultArray);
+                }
+              }}>
+              {this.state.indexQuestion + 1 !== this.state.numQuestionsTotal ? (
                 <a className={styles.nextButtonLabel}>Próxima pergunta</a>
-                <svg
-                  className={styles.arrowIcon}
-                  xmlns="http://www.w3.org/2000/svg"
-                  // height="24px"
-                  viewBox="0 0 24 24"
-                  // width="24px"
-                  // fill="#5a6375"
-                >
-                  <path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
-                  <path d="M7.38 21.01c.49.49 1.28.49 1.77 0l8.31-8.31c.39-.39.39-1.02 0-1.41L9.15 2.98c-.49-.49-1.28-.49-1.77 0s-.49 1.28 0 1.77L14.62 12l-7.25 7.25c-.48.48-.48 1.28.01 1.76z" />
-                </svg>
-              </div>
+              ) : (
+                <a className={styles.nextButtonLabel}>Resultado</a>
+              )}
+
+              <svg
+                className={styles.arrowIcon}
+                xmlns="http://www.w3.org/2000/svg"
+                // height="24px"
+                viewBox="0 0 24 24"
+                // width="24px"
+                // fill="#5a6375"
+              >
+                <path d="M24 24H0V0h24v24z" fill="none" opacity=".87" />
+                <path d="M7.38 21.01c.49.49 1.28.49 1.77 0l8.31-8.31c.39-.39.39-1.02 0-1.41L9.15 2.98c-.49-.49-1.28-.49-1.77 0s-.49 1.28 0 1.77L14.62 12l-7.25 7.25c-.48.48-.48 1.28.01 1.76z" />
+              </svg>
             </div>
-          )}
+          </div>
+          {/* )} */}
         </div>
       </>
     );

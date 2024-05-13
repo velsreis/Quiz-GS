@@ -1,32 +1,31 @@
 import React from "react";
-import styles from "./start.module.css";
+import styles from "./result.module.css";
+import { IResult } from "../../utils/IData";
 
-interface IStartScreeenProps {
-  startButton: () => void;
+interface IResultScrennProps {
+  resultData: IResult[];
 }
 
-export default class StartScreen extends React.Component<IStartScreeenProps> {
+export default class ResultScrenn extends React.Component<IResultScrennProps> {
   render() {
     return (
       <>
-        <div className={styles.start}>
-          <div className={styles.startHeader}>
-            <a className={styles.startTitle}>MEGA QUIZ</a>
-            <a className={styles.startDescription}>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus
-              repellat voluptatibus perspiciatis similique nam tempore, optio
-              quis cumque illum, vel qui voluptatum ipsa, porro facere id
-              distinctio totam numquam quibusdam!
-            </a>
-          </div>
+        <div className={styles.results}>
+          <div className={styles.resultTitle}>Resultados</div>
+          <div className={styles.questions}>
+            {this.props.resultData.map((item, index) => (
+              <div
+                className={`${styles.resultQuestion} 
+            ${item.isCorrect ? styles.correct : styles.incorrect}`}>
+                <div className={styles.questionNumberContainer}>
+                  <div className={styles.questionNumber}>{index + 1}</div>
+                </div>
 
-          <div
-            className={styles.startButton}
-            onClick={() => {
-              this.props.startButton();
-            }}
-          >
-            START
+                <div className={styles.questionTextContainer}>
+                  <div className={styles.questionText}>{item.question}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </>

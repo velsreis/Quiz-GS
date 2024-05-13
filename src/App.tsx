@@ -3,9 +3,12 @@ import React from "react";
 import styles from "./App.module.css";
 import StartScreen from "./components/startScreen/StartScreen.tsx";
 import QuestionsScreen from "./components/QuestionsScreen/QuestionsScreen.tsx";
+import ResultScrenn from "./components/ResultScreen/ResultScreen.tsx";
+
 import CircularProgress from "@mui/material/CircularProgress";
 
-import { IQuestions } from "./utils/IData.ts";
+import { IQuestions, IResult } from "./utils/IData.ts";
+
 enum ScreenEnum {
   start,
   loading,
@@ -17,6 +20,7 @@ interface IAppState {
   screen: ScreenEnum;
   data: IQuestions;
   Loaded: boolean;
+  resultData: IResult[];
 }
 
 export default class App extends React.Component<{}, IAppState> {
@@ -26,6 +30,7 @@ export default class App extends React.Component<{}, IAppState> {
     screen: ScreenEnum.start,
     data: { questions: [] },
     Loaded: false,
+    resultData: [],
   };
 
   componentDidMount(): void {
@@ -72,8 +77,15 @@ export default class App extends React.Component<{}, IAppState> {
         )}
 
         {this.state.screen === ScreenEnum.questions && this.state.data.questions.length > 0 && (
-          <QuestionsScreen questionsData={this.state.data} />
+          <QuestionsScreen
+            questionsData={this.state.data}
+            resultReturn={(res: IResult[]) =>
+              this.setState({ resultData: res, screen: ScreenEnum.result }, () => console.log("AAAAAAAAAAAAAAA", res))
+            }
+          />
         )}
+
+        {this.state.screen === ScreenEnum.result && <ResultScrenn resultData={this.state.resultData} />}
       </div>
     );
   }
