@@ -49,13 +49,9 @@ export default class QuestionsScreen extends React.Component<IQuestionsScreenPro
 
     let answers = Object.keys(newObj).map((key) => ({ [key]: newObj[key] }));
     this.shuffleArray(answers);
-    console.log(answers);
-    this.setState(
-      {
-        scrambledAnswers: answers,
-      },
-      () => console.log(this.state.scrambledAnswers)
-    );
+    this.setState({
+      scrambledAnswers: answers,
+    });
   }
 
   private setResult(isCorrect: boolean): void {
@@ -90,8 +86,6 @@ export default class QuestionsScreen extends React.Component<IQuestionsScreenPro
   }
 
   componentDidMount(): void {
-    console.log("questionsData props", this.props.questionsData);
-
     this.setQuestion();
   }
 
@@ -109,10 +103,6 @@ export default class QuestionsScreen extends React.Component<IQuestionsScreenPro
           {this.state.scrambledAnswers.map((answer, index) => {
             const isCorrect = Object.keys(answer)[0] === "answer1";
             const isSelected = this.state.indexOptionSelected === index;
-            console.log("isSelected", isSelected);
-            console.log("points", this.state.points);
-            console.log("result", this.state.resultArray);
-
             return (
               <button
                 className={`${styles.option} 
@@ -121,7 +111,6 @@ export default class QuestionsScreen extends React.Component<IQuestionsScreenPro
                 }`}
                 key={index}
                 onClick={() => {
-                  console.log("aaaaaa", isCorrect);
                   if (this.state.indexOptionSelected === null) {
                     this.setState({ indexOptionSelected: index });
                     this.setResult(isCorrect);

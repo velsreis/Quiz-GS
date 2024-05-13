@@ -79,9 +79,7 @@ export default class App extends React.Component<{}, IAppState> {
         {this.state.screen === ScreenEnum.questions && this.state.data.questions.length > 0 && (
           <QuestionsScreen
             questionsData={this.state.data}
-            resultReturn={(res: IResult[]) =>
-              this.setState({ resultData: res, screen: ScreenEnum.result }, () => console.log("AAAAAAAAAAAAAAA", res))
-            }
+            resultReturn={(res: IResult[]) => this.setState({ resultData: res, screen: ScreenEnum.result })}
           />
         )}
 
