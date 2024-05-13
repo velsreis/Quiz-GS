@@ -42,7 +42,7 @@ export default class QuestionsScreen extends React.Component<IQuestionsScreenPro
   }
 
   private shuffleAnswers(): void {
-    let newObj = {
+    let newObj: any = {
       ...this.props.questionsData.questions[this.state.indexQuestion],
     };
     delete newObj.question;
