@@ -1,0 +1,16 @@
+body {
+  font-family: "Rubik", sans-serif;
+  line-height: 100%;
+  color: var(--secondary-color);
+
+  background-color: var(--background-color);
+}
+.App {
+  .loading {
+    display: flex;
+    /* width: 100%; */
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+}

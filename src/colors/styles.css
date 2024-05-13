@@ -1,0 +1,40 @@
+:root {
+  --primary-color: #a729f5;
+  --secondary-color: #313e51;
+  --tertiary-color: #626c7f;
+  --option-letter-color: #626c7f;
+  --background-color: #f4f6fa;
+  --option-letter-background-color: #f4f6fa;
+  --color-white: #fff;
+  --progress-n-option-bg-color: #fff;
+  --html-icon-color: #fff1e9;
+  --css-icon-color: #e0fdef;
+  --javascript-icon-color: #ebf0ff;
+  --accessibility-icon-color: #f6e7ff;
+  --wrong-answer-color: #ee5454;
+  --correct-answer-color: #26d782;
+  --pattern-color: #edf1f9;
+  --box-shadow-color: rgba(143, 160, 193, 0.14);
+
+  --correct-letter-container-color: #b0fcd7;
+  --wrong-letter-container-color: #fdb0b0;
+}
+
+:root.dark {
+  --primary-color: #a729f5;
+  --secondary-color: #fff;
+  --tertiary-color: #abc1e1;
+  --option-letter-color: #626c7f;
+  --background-color: #313e51;
+  --option-letter-background-color: #f4f6fa;
+  --color-white: #fff;
+  --progress-n-option-bg-color: #3b4d66;
+  --html-icon-color: #fff1e9;
+  --css-icon-color: #e0fdef;
+  --javascript-icon-color: #ebf0ff;
+  --accessibility-icon-color: #f6e7ff;
+  --wrong-answer-color: #ee5454;
+  --correct-answer-color: #26d782;
+  --pattern-color: #2d3949;
+  --box-shadow-color: rgba(49, 62, 81, 0.14);
+}
